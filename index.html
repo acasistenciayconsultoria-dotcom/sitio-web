@@ -1220,6 +1220,21 @@ footer{background:var(--char);color:#cfcabe;padding-block:72px 32px}
 .hchips a:hover{background:var(--olive);border-color:var(--olive);color:#fff}
 @media (max-width:700px){.hq{gap:12px}.hq b{font-size:21px}.hq span{font-size:10px;letter-spacing:.1em}}
 </style>
+<style>
+#feat-news.feat-news{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:0 0 36px;padding:0;border:0;background:none;border-radius:0}
+#feat-news .fn{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:stretch;padding:18px 20px 18px 18px;border:1px solid var(--line);border-left:3px solid var(--olive);background:var(--paper);border-radius:4px;transition:box-shadow .3s,transform .3s}
+#feat-news .fn:hover{box-shadow:0 18px 34px -24px rgba(21,21,19,.45);transform:translateY(-2px)}
+#feat-news .th{width:84px;height:112px;object-fit:cover;object-position:center top;border-radius:3px;box-shadow:0 10px 20px -12px rgba(0,0,0,.6)}
+#feat-news .tx{display:flex;flex-direction:column;min-width:0}
+#feat-news .k{font:600 10px var(--sans);letter-spacing:.24em;color:var(--olive-tx);text-transform:uppercase}
+#feat-news h3{margin:6px 0 6px;font:400 22px/1.15 var(--serif)}
+#feat-news p{margin:0;color:var(--muted);font-size:14px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#feat-news .ft{margin-top:auto;padding-top:12px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+#feat-news .ft span{font:500 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+#feat-news button{padding:10px 18px;font-size:11px;letter-spacing:.14em;white-space:nowrap;flex:none}
+#feat-news .ft{flex-wrap:wrap}
+@media (max-width:860px){#feat-news.feat-news{grid-template-columns:1fr}#feat-news .th{width:64px;height:86px}#feat-news h3{font-size:20px}}
+</style>
 </head>
 <body>
 
@@ -1644,7 +1659,7 @@ footer{background:var(--char);color:#cfcabe;padding-block:72px 32px}
 <div class="page" data-page="novedades">
   <section class="phead grain">
     <div class="wrap">
-      <div><p class="crumb"><a href="#inicio">Inicio</a><span>/</span><span>Novedades</span></p><h1 class="stmt">Al día con <em>la norma</em></h1><p>Publicaciones y jurisprudencia con un enfoque práctico.</p><div class="hq"><div><b>Publicaciones</b><span>Análisis del estudio</span></div><div><b>Jurisprudencia</b><span>Criterios relevantes</span></div><a href="#novedades" class="hq-last" id="hq-last"><b>Último</b><span>Ley N.º 31814 →</span></a></div></div>
+      <div><p class="crumb"><a href="#inicio">Inicio</a><span>/</span><span>Novedades</span></p><h1 class="stmt">Al día con <em>la norma</em></h1><p>Publicaciones y jurisprudencia con un enfoque práctico.</p><div class="hq"><div><b>Publicaciones</b><span>Análisis del estudio</span></div><div><b>Jurisprudencia</b><span>Criterios relevantes</span></div><a href="#novedades" class="hq-last" id="hq-last"><b>Último</b><span>Buen gobierno corporativo →</span></a></div></div>
       <div class="art"><div class="feed" aria-hidden="true">
   <div class="fc c1"><span class="tg">JURISPRUDENCIA</span><i></i><i></i><i class="s"></i><em>Tribunal · Criterio</em></div>
   <div class="fc c2"><span class="tg">NORMATIVA</span><i></i><i></i><i class="s"></i><em>Ley N.º 31814</em></div>
@@ -2159,9 +2174,9 @@ footer{background:var(--char);color:#cfcabe;padding-block:72px 32px}
 <script>(function(){
   /* ---------- Novedades: destacado + cinta ---------- */
   function fillNews(){var N=window.__NEWS||[];var f=document.getElementById('feat-news'),t=document.getElementById('tk-in');
-    if(f&&N.length&&!f.childElementCount){var n=N[0];
-      f.innerHTML='<div><div class="k">Destacado · '+n.tipo+' · '+n.materia+'</div><h3>'+n.titulo+'</h3><p>'+(n.resumen||'')+' <span style="white-space:nowrap">· '+n.fecha+'</span></p></div><button type="button">Leer documento</button>';
-      f.querySelector('button').addEventListener('click',function(){if(window.openDoc)window.openDoc(n)})}
+    if(f&&N.length&&!f.childElementCount){var picks=['Publicaciones','Jurisprudencia'].map(function(tp){for(var i=0;i<N.length;i++)if(N[i].tipo===tp)return N[i];return null}).filter(Boolean);
+      f.innerHTML=picks.map(function(n,i){return '<article class="fn">'+(n.portada?'<img class="th" src="'+n.portada+'" alt="" loading="lazy">':'')+'<div class="tx"><div class="k">Destacado · '+n.tipo+'</div><h3>'+n.titulo+'</h3><p>'+(n.resumen||'')+'</p><div class="ft"><span>'+n.materia+' · '+n.fecha+'</span><button type="button" data-i="'+i+'">Leer documento</button></div></div></article>'}).join('');
+      [].forEach.call(f.querySelectorAll('button'),function(b){b.addEventListener('click',function(){if(window.openDoc)window.openDoc(picks[+b.dataset.i])})})}
     if(t&&!t.childElementCount){var it=N.map(function(n){return '<span><b>'+n.tipo+'</b>'+n.titulo+' · '+n.fecha+'</span>'});
       it=it.concat(['<span>Próximamente: publicaciones en compliance y debida diligencia</span>','<span>Jurisprudencia tributaria y penal empresarial</span>','<span>Criterios relevantes para el sector minero</span>']);
       t.innerHTML=it.join('')+it.join('')}}
