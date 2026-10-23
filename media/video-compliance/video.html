@@ -1,0 +1,363 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#052051;font-family:Montserrat,Poppins,sans-serif;color:#fff}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden}
+#bg{position:absolute;inset:0;background:linear-gradient(180deg,#041a45 0%,#073482 34%,#0d4a90 58%,#0b6380 80%,#0f9f78 100%)}
+#grid{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1.6px,transparent 1.9px);background-size:40px 40px}
+#glow{position:absolute;width:1500px;height:1500px;left:-210px;top:260px;border-radius:50%;background:radial-gradient(circle,rgba(95,240,176,.20),transparent 62%)}
+#alert{position:absolute;inset:0;background:radial-gradient(circle at 50% 38%,rgba(255,70,90,.30),rgba(110,0,25,.62));opacity:0}
+.star{position:absolute;width:8px;height:8px;border-radius:50%;background:#7ff3c4;box-shadow:0 0 14px 4px rgba(127,243,196,.5)}
+.scene{position:absolute;inset:0;opacity:0}
+.el{position:absolute;transform-origin:50% 50%;opacity:0}
+.chip{left:0;right:0;margin:auto;width:max-content;top:190px;background:#f7c948;color:#0b2350;font-weight:800;font-size:30px;letter-spacing:.12em;padding:14px 34px;border-radius:50px;white-space:nowrap}
+.chip.red{background:#ff4d5e;color:#fff}
+.h{left:60px;right:60px;text-align:center;font-weight:800;line-height:1.08}
+.g{color:#5ff0b0}.y{color:#f7c948}.r{color:#ff6b7a}
+.card{background:#fff;color:#0b2350;border-radius:30px;box-shadow:0 22px 56px rgba(0,0,0,.32)}
+.ico{display:flex;align-items:center;justify-content:center;border-radius:24px;background:#eaf3ff;flex:none}
+.ico svg{width:70%;height:70%}
+/* top bar */
+#logo{position:absolute;left:46px;top:60px;display:flex;align-items:center;gap:12px;background:rgba(3,18,48,.55);border:1.5px solid rgba(255,255,255,.18);padding:10px 20px 10px 12px;border-radius:18px}
+#logo .t1{font-weight:800;font-size:28px;line-height:1}
+#logo .t2{font-size:13px;opacity:.85;margin-top:4px;letter-spacing:.02em}
+#prog{position:absolute;left:46px;right:46px;top:26px;height:8px;display:flex;gap:8px}
+#prog i{flex:1;border-radius:6px;background:rgba(255,255,255,.18);overflow:hidden;position:relative}
+#prog i b{position:absolute;left:0;top:0;bottom:0;width:0;background:#5ff0b0}
+#cap{position:absolute;left:50px;right:50px;top:1600px;min-height:150px;padding:26px 34px;border-radius:30px;background:rgba(3,20,50,.78);border:1.5px solid rgba(127,243,196,.25);text-align:center;font-weight:800;font-size:50px;line-height:1.22;box-shadow:0 16px 40px rgba(0,0,0,.3)}
+#cap span{display:inline-block;margin:0 9px}
+#pepe{position:absolute;left:0;top:0;width:1080px;height:1920px;overflow:visible}
+/* scene specific */
+.headline{width:900px;left:90px;padding:34px 40px;display:flex;align-items:center;gap:22px}
+.tag{background:#ff4d5e;color:#fff;font-weight:800;font-size:28px;letter-spacing:.1em;padding:8px 16px;border-radius:10px}
+.tl-card{left:220px;width:800px;padding:28px 34px}
+.tl-card .yr{font-size:58px;font-weight:900;color:#0b3a8c;display:flex;align-items:center;gap:16px}
+.tl-card .tx{font-size:38px;font-weight:600;color:#3b4a6b;margin-top:8px;line-height:1.3}
+.tl-card .sm{font-size:24px;font-weight:700;color:#19b67a;margin-top:8px;letter-spacing:.06em}
+.dot{width:46px;height:46px;border-radius:50%;background:#5ff0b0;border:8px solid #052a66;box-shadow:0 0 0 6px rgba(95,240,176,.35)}
+.step{width:270px;height:270px;border-radius:50%;background:#fff;color:#0b2350;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.step svg{width:110px;height:110px}
+.step b{font-size:32px;margin-top:10px}
+.tile{width:450px;height:190px;padding:24px;display:flex;align-items:center;gap:22px}
+.tile b{font-size:36px;line-height:1.12}
+.medal{left:90px;width:900px;padding:26px 30px;display:flex;align-items:center;gap:26px}
+.medal .ico{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#f7c948,#ffdf7e)}
+.medal b{font-size:44px;display:block}
+.medal i{font-style:normal;font-size:28px;color:#3b4a6b;font-weight:600}
+.case{left:70px;width:940px;padding:30px 36px;overflow:hidden}
+.case .top{display:flex;justify-content:space-between;align-items:center}
+.case .dt{font-size:28px;font-weight:800;color:#ff4d5e;letter-spacing:.08em}
+.case .reg{font-size:24px;font-weight:700;color:#5b6b8c}
+.case .nm{font-size:50px;font-weight:900;margin-top:8px}
+.case .amt{font-size:84px;font-weight:900;color:#e5303f;line-height:1.05;margin-top:4px}
+.case .ds{font-size:30px;font-weight:600;color:#3b4a6b;margin-top:6px}
+.stamp{right:40px;top:40px;border:8px solid #e5303f;color:#e5303f;font-weight:900;font-size:50px;padding:6px 22px;border-radius:14px;letter-spacing:.08em;background:rgba(255,255,255,.85)}
+.btn{left:0;right:0;margin:auto;width:max-content;background:#f7c948;color:#0b2350;font-weight:900;font-size:58px;padding:28px 60px;border-radius:80px;box-shadow:0 0 0 10px rgba(247,201,72,.25),0 20px 40px rgba(0,0,0,.3)}
+</style></head><body><div id="root">
+<div id="bg"></div><div id="glow"></div><div id="grid"></div><div id="alert"></div><div id="stars"></div>
+<div id="scenes"></div>
+<svg id="pepe" viewBox="0 0 1080 1920"></svg>
+<div id="prog"></div>
+<div id="logo"><svg width="64" height="64" viewBox="0 0 64 64"><path d="M32 6 52 14v16c0 13-9 22-20 27C21 52 12 43 12 30V14z" fill="none" stroke="#cfe6ff" stroke-width="4" stroke-linejoin="round"/><path d="M21 31l8 8 15-17" fill="none" stroke="#5ff0b0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="45" cy="46" r="8" fill="#0b2350" stroke="#fff" stroke-width="3.5"/><path d="M51 52l6 6" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg><div><div class="t1">Diligence<span class="g">Check</span></div><div class="t2">Smart Due Diligence &amp; Compliance</div></div></div>
+<div id="cap"></div>
+</div>
+<script>
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lerp=(a,b,u)=>a+(b-a)*u;
+const eo=u=>1-Math.pow(1-cl(u),3);
+const eio=u=>{u=cl(u);return u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2};
+const eob=u=>{u=cl(u);const c1=1.9,c3=c1+1;return 1+c3*Math.pow(u-1,3)+c1*Math.pow(u-1,2)};
+const prog=(t,t0,d)=>cl((t-t0)/d);
+const $=id=>document.getElementById(id);
+let TM,S={},D={},WD={},LINES=[],RMS=[],POPS=[],WH=[],TOTAL=0;
+function norm(w){return w.toLowerCase().replace(/[¿?¡!.,:;"“”]/g,'')}
+function W(s,word,frac,n=1){const L=WD[s]||[];let k=0;for(const w of L){if(norm(w[3])===norm(word)){k++;if(k===n)return w[1];}}return S[s]+D[s]*frac;}
+function st(el,o,tx=0,ty=0,s=1,r=0){if(typeof el==='string')el=$(el);el.style.opacity=o;el.style.transform=`translate(${tx}px,${ty}px) scale(${s}) rotate(${r}deg)`;}
+function pop(id,t,t0,o={}){const dur=o.dur||.55,dy=o.dy??50,dx=o.dx||0;const u=prog(t,t0,dur);let a=eo(u),s=lerp(o.s0??.6,1,eob(u));if(o.out!=null){const v=eo(prog(t,o.out,.4));a*=1-v;s*=1-.15*v;}st(id,a,dx*(1-eo(u)),dy*(1-eo(u)),s,(o.r||0)*(1-eo(u)));}
+const ICON={
+ law:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b3a8c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v34M12 40h24M10 12h28"/><path d="M10 12 4 26h12zM38 12l-6 14h12z"/><path d="M4 26a6 4 0 0 0 12 0M32 26a6 4 0 0 0 12 0"/></svg>',
+ factory:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b3a8c" stroke-width="3" stroke-linejoin="round"><path d="M4 42V22l12 7v-7l12 7v-7l12 7v13zM36 29V8h6v21"/><path d="M12 36h4M22 36h4M32 36h4" stroke="#19b67a"/></svg>',
+ doc:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b3a8c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4h20l8 8v32H10z"/><path d="M30 4v8h8M16 20h16M16 27h16M16 34h10"/><path d="M28 36l4 4 8-9" stroke="#19b67a"/></svg>',
+ lupa:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b3a8c" stroke-width="4" stroke-linecap="round"><circle cx="20" cy="20" r="13"/><path d="M30 30l12 12"/><path d="M20 13v9M20 27v.5" stroke="#e5303f"/></svg>',
+ shield:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b3a8c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4l16 6v12c0 10-7 18-16 22C15 40 8 32 8 22V10z"/><path d="M16 24l6 6 11-12" stroke="#19b67a"/></svg>',
+ lock:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b3a8c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="20" width="32" height="24" rx="5"/><path d="M15 20v-6a9 9 0 0 1 18 0v6"/><path d="M24 29v6" stroke="#19b67a"/></svg>',
+ gavel:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b3a8c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8l14 14M12 14l14 14M15 11l14 14M22 21L6 37"/><path d="M26 42h18" stroke="#19b67a"/></svg>',
+ worker:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b3a8c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="18" r="8"/><path d="M14 16a10 10 0 0 1 20 0z" fill="#f7c948"/><path d="M8 44c2-9 8-13 16-13s14 4 16 13"/></svg>',
+ tax:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b3a8c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="4" width="32" height="40" rx="4"/><path d="M16 32l16-16"/><circle cx="17" cy="17" r="3" stroke="#19b67a"/><circle cx="31" cy="31" r="3" stroke="#19b67a"/></svg>',
+ data:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b3a8c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="22" cy="10" rx="14" ry="5"/><path d="M8 10v24c0 3 6 5 14 5M36 10v10M8 22c0 3 6 5 14 5"/><rect x="28" y="30" width="16" height="12" rx="2" stroke="#19b67a"/><path d="M31 30v-3a5 5 0 0 1 10 0v3" stroke="#19b67a"/></svg>',
+ leaf:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b3a8c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M40 8C16 8 8 20 10 38c18 2 30-6 30-30z" stroke="#19b67a"/><path d="M10 38C18 28 26 22 34 16"/></svg>',
+ coin:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b3a8c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="22" r="14"/><path d="M24 15h-6a3.5 3.5 0 0 0 0 7h4a3.5 3.5 0 0 1 0 7h-7M20 12v3M20 29v3"/><path d="M34 26l10 4v6c0 5-4 8-10 10-6-2-10-5-10-10v-6z" fill="#fff" stroke="#19b67a"/></svg>',
+ star:'<svg viewBox="0 0 48 48"><path d="M24 4l6 13 14 1-11 9 4 14-13-8-13 8 4-14L4 18l14-1z" fill="#0b2350"/></svg>',
+ hands:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b2350" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="13" r="6"/><circle cx="33" cy="13" r="6"/><path d="M4 40c1-9 5-14 11-14s9 3 9 3 3-3 9-3 10 5 11 14"/></svg>',
+ legal:'<svg viewBox="0 0 48 48" fill="none" stroke="#0b2350" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4l16 6v12c0 10-7 18-16 22C15 40 8 32 8 22V10z"/><path d="M16 24l6 6 11-12"/></svg>',
+ warn:'<svg viewBox="0 0 48 48"><path d="M24 4 46 42H2z" fill="#f7c948" stroke="#0b2350" stroke-width="3" stroke-linejoin="round"/><path d="M24 17v13" stroke="#0b2350" stroke-width="5" stroke-linecap="round"/><circle cx="24" cy="36" r="3" fill="#0b2350"/></svg>',
+ wa:'<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#25d366"/><path d="M14 35l2-6a11 11 0 1 1 4 4z" fill="#fff"/><path d="M20 18c1 4 4 8 9 10l2-2 3 2c-1 3-4 4-8 2s-8-7-9-11c0-2 1-3 3-4z" fill="#25d366"/></svg>'
+};
+const US='<svg width="70" height="46" viewBox="0 0 70 46"><rect width="70" height="46" rx="5" fill="#fff"/>'+[0,2,4,6].map(i=>`<rect y="${i*6.6}" width="70" height="6.6" fill="#d22f3c"/>`).join('')+'<rect y="39.6" width="70" height="6.4" fill="#d22f3c"/><rect width="30" height="26" fill="#1f3a8a"/></svg>';
+const PE='<svg width="70" height="46" viewBox="0 0 70 46"><rect width="70" height="46" rx="5" fill="#d91023"/><rect x="23" width="24" height="46" fill="#fff"/></svg>';
+function ico(k,size,bg){return `<div class="ico" style="width:${size}px;height:${size}px;${bg?'background:'+bg:''}">${ICON[k]}</div>`}
+const HTML={
+1:`<div class="el chip red" id="s1chip">ALERTA · OCTUBRE 2026</div>
+<div class="el h" id="s1num" style="top:330px;font-size:104px;letter-spacing:-.03em;white-space:nowrap">US$ <span id="s1cnt">0</span></div>
+<div class="el h" id="s1lbl" style="top:470px;font-size:42px;font-weight:700;opacity:.9">en multas a dos gigantes financieros</div>
+<div class="el card headline" id="s1a" style="top:640px"><span class="tag">MULTA</span><div><div style="font-size:52px;font-weight:900">AMERICAN EXPRESS</div><div style="font-size:42px;font-weight:700;color:#e5303f">US$ 350 millones</div></div></div>
+<div class="el card headline" id="s1b" style="top:900px"><span class="tag">MULTA</span><div><div style="font-size:52px;font-weight:900">BANK OF AMERICA</div><div style="font-size:42px;font-weight:700;color:#e5303f">US$ 1.200 millones</div></div></div>
+<div class="el h" id="s1q" style="top:700px;font-size:96px">¿El motivo?</div>
+<div class="el h" id="s1f" style="top:860px;font-size:84px"><div style="width:150px;height:150px;margin:0 auto 26px">${ICON.warn}</div>Fallas en su<br><span class="y" style="font-size:112px">COMPLIANCE</span></div>`,
+2:`<div class="el chip" id="s2chip">COMPLIANCE EN 2 MINUTOS</div>
+<div class="el h" id="s2t" style="top:300px;font-size:96px">¿Qué es el<br><span class="g">compliance?</span></div>
+<div class="el card" id="s2b" style="left:60px;top:640px;width:340px;padding:24px 28px;font-size:36px;font-weight:800;border-radius:30px 30px 6px 30px">¡Hola! Soy <span style="color:#19b67a">Pepe</span>, tu oficial de cumplimiento</div>`,
+3:`<div class="el chip" id="s3chip">¿QUÉ SIGNIFICA?</div>
+<div class="el h" id="s3w1" style="top:300px;font-size:104px">COMPLIANCE</div>
+<div class="el h" id="s3eq" style="top:300px;font-size:104px"><span class="g">CUMPLIMIENTO</span></div>
+<div class="el card" id="s3a" style="left:60px;top:500px;width:640px;padding:22px 28px;display:flex;align-items:center;gap:24px">${ico('law',110)}<b style="font-size:44px">Las leyes</b></div>
+<div class="el card" id="s3b" style="left:60px;top:700px;width:640px;padding:22px 28px;display:flex;align-items:center;gap:24px">${ico('factory',110)}<b style="font-size:44px">Las normas<br>de su sector</b></div>
+<div class="el card" id="s3c" style="left:60px;top:900px;width:640px;padding:22px 28px;display:flex;align-items:center;gap:24px">${ico('doc',110)}<b style="font-size:44px">Sus políticas<br>internas</b></div>
+<div class="el" id="s3d" style="left:60px;top:1130px;width:640px;text-align:center;background:#5ff0b0;color:#0b2350;font-weight:900;font-size:44px;padding:22px;border-radius:24px">✓ Y PODER DEMOSTRARLO</div>`,
+4:`<div class="el chip" id="s4chip">¿CÓMO NACIÓ?</div>
+<div class="el" id="s4line" style="left:146px;top:330px;width:10px;height:930px;background:rgba(255,255,255,.18);border-radius:6px;opacity:1"><div id="s4fill" style="width:10px;height:0;background:#5ff0b0;border-radius:6px"></div></div>
+<div class="el dot" id="s4d1" style="left:128px;top:360px"></div><div class="el dot" id="s4d2" style="left:128px;top:680px"></div><div class="el dot" id="s4d3" style="left:128px;top:1000px"></div>
+<div class="el card tl-card" id="s4a" style="top:330px"><div class="yr">1977 ${US}</div><div class="tx">EE. UU. prohíbe sobornar a funcionarios extranjeros</div><div class="sm">LEY FCPA</div></div>
+<div class="el card tl-card" id="s4b" style="top:650px"><div class="yr">2002 ${US}</div><div class="tx">Tras el caso Enron, controles internos más estrictos</div><div class="sm">LEY SARBANES-OXLEY</div></div>
+<div class="el card tl-card" id="s4c" style="top:970px"><div class="yr">2018 ${PE}</div><div class="tx">Las empresas responden por corrupción y lavado de activos</div><div class="sm">LEY 30424 VIGENTE</div></div>`,
+5:`<div class="el chip" id="s5chip">¿CÓMO FUNCIONA HOY?</div>
+<div class="el h" id="s5a" style="top:300px;font-size:58px;font-weight:700"><span style="text-decoration:line-through;text-decoration-thickness:6px;text-decoration-color:#ff6b7a;opacity:.85">Lista de obligaciones</span></div>
+<div class="el h" id="s5b" style="top:390px;font-size:92px">Gestión de <span class="g">riesgos</span></div>
+<div class="el step" id="s5s1" style="left:90px;top:610px">${ICON.lupa}<b>Identificar</b></div>
+<div class="el step" id="s5s2" style="left:405px;top:610px">${ICON.shield}<b>Mitigar</b></div>
+<div class="el step" id="s5s3" style="left:720px;top:610px">${ICON.lock}<b>Controlar</b></div>
+<div class="el" id="s5ar1" style="left:357px;top:715px;font-size:60px;font-weight:900;color:#5ff0b0">›</div>
+<div class="el" id="s5ar2" style="left:672px;top:715px;font-size:60px;font-weight:900;color:#5ff0b0">›</div>
+<div class="el h" id="s5c" style="top:960px;left:60px;right:340px;text-align:left;font-size:44px;font-weight:700">…para que los riesgos <span class="y">no se materialicen</span></div>`,
+6:`<div class="el chip" id="s6chip">TIPOS DE COMPLIANCE</div>
+<div class="el h" id="s6t" style="top:290px;font-size:76px">Varía según <span class="g">la materia</span></div>
+<div class="el card tile" id="s6a" style="left:60px;top:470px">${ico('gavel',130)}<b>Penal</b></div>
+<div class="el card tile" id="s6b" style="left:570px;top:470px">${ico('worker',130)}<b>Laboral</b></div>
+<div class="el card tile" id="s6c" style="left:60px;top:690px">${ico('tax',130)}<b>Tributario</b></div>
+<div class="el card tile" id="s6d" style="left:570px;top:690px">${ico('data',130)}<b>Protección de datos</b></div>
+<div class="el card tile" id="s6e" style="left:60px;top:910px">${ico('leaf',130)}<b>Ambiental</b></div>
+<div class="el card tile" id="s6f" style="left:570px;top:910px">${ico('coin',130)}<b>Prevención del lavado</b></div>`,
+7:`<div class="el chip" id="s7chip">¿QUIÉN FIJA LAS REGLAS?</div>
+<div class="el" id="s7globe" style="left:310px;top:290px;width:460px;height:460px"><svg width="460" height="460" viewBox="0 0 500 500"><g id="s7svg"></g></svg></div>
+<div class="el" id="s7gafi" style="left:340px;top:410px;width:400px;text-align:center"><div style="font-size:120px;font-weight:900;line-height:1;text-shadow:0 6px 24px rgba(0,0,0,.4)">GAFI</div><div style="font-size:34px;font-weight:800;color:#f7c948;margin-top:6px">desde 1989</div></div>
+<div class="el h" id="s7d" style="top:780px;font-size:32px;font-weight:600;opacity:.9">Grupo de Acción Financiera Internacional · estándares contra el lavado de activos</div>
+<div class="el" id="s7ln" style="left:536px;top:880px;width:8px;height:100px;background:linear-gradient(#f7c948,#5ff0b0);border-radius:6px"></div>
+<div class="el card" id="s7pe" style="left:330px;top:990px;width:420px;padding:18px;display:flex;align-items:center;justify-content:center;gap:16px;font-size:46px;font-weight:900">${PE} PERÚ</div>
+<div class="el card" id="s7sbs" style="left:60px;top:1140px;width:430px;padding:20px;text-align:center"><div style="font-size:52px;font-weight:900;color:#0b3a8c">SBS</div><div style="font-size:24px;font-weight:600;color:#5b6b8c">Superintendencia de Banca, Seguros y AFP</div></div>
+<div class="el card" id="s7uif" style="left:590px;top:1140px;width:430px;padding:20px;text-align:center"><div style="font-size:52px;font-weight:900;color:#0b3a8c">UIF-Perú</div><div style="font-size:24px;font-weight:600;color:#5b6b8c">Unidad de Inteligencia Financiera</div></div>`,
+8:`<div class="el chip" id="s8chip">¿POR QUÉ ES IMPORTANTE?</div>
+<div class="el card medal" id="s8a" style="top:300px">${ico('star',120)}<div><b>Protege tu reputación</b><i>Tu marca vale lo que vale tu confianza</i></div></div>
+<div class="el card medal" id="s8b" style="top:500px">${ico('hands',120)}<div><b>Genera confianza</b><i>En bancos, clientes e inversionistas</i></div></div>
+<div class="el card medal" id="s8c" style="top:700px">${ico('legal',120)}<div><b>Te protege legalmente</b><i>Un modelo de prevención adecuado puede eximir a la empresa (Ley 30424)</i></div></div>`,
+9:`<div class="el chip red" id="s9chip">LAS CONSECUENCIAS</div>
+<div class="el h" id="s9t" style="top:290px;font-size:80px">No tenerlo <span class="r">cuesta caro</span></div>
+<div class="el card case" id="s9a" style="top:430px"><div class="top"><span class="dt">8 OCT 2026</span><span class="reg">Regulador: OCC</span></div><div class="nm">American Express</div><div class="amt">US$ <span id="s9n1">0</span> millones</div><div class="ds">Fallas en su programa antilavado</div><div class="el stamp" id="s9s1">MULTADO</div></div>
+<div class="el card case" id="s9b" style="top:850px"><div class="top"><span class="dt">13 OCT 2026</span><span class="reg">Tesoro de EE. UU.</span></div><div class="nm">Bank of America</div><div class="amt">US$ <span id="s9n2">0</span> millones</div><div class="ds">Lavado de activos y sanciones internacionales</div><div class="el stamp" id="s9s2">MULTADO</div></div>`,
+10:`<div class="el h" id="s10a" style="top:260px;font-size:72px">El compliance<br><span style="font-weight:600">no es un gasto:</span></div>
+<div class="el h" id="s10b" style="top:470px;font-size:84px">es el <span class="g">ESCUDO</span><br>de tu empresa</div>
+<div class="el" id="s10c" style="left:0;right:0;margin:auto;width:max-content;top:1270px;background:#ff4d5e;font-weight:900;font-size:44px;padding:18px 36px;border-radius:50px">No esperes una multa para actuar</div>
+<div class="el card" id="s10d" style="left:90px;top:1235px;width:900px;padding:26px;text-align:center"><div style="font-size:30px;font-weight:700;color:#5b6b8c;letter-spacing:.2em">TE ACOMPAÑAMOS</div><div style="font-size:58px;font-weight:900;margin-top:6px">A&amp;C <span style="font-weight:600">Asistencia y Consultoría</span></div><div style="font-size:34px;font-weight:700;color:#19b67a;margin-top:10px">+ DiligenceCheck: conoce a tus contrapartes en una sola consulta</div></div>
+<div class="el btn" id="s10e" style="top:900px">Escríbenos “DEMO”</div>
+<div class="el h" id="s10f" style="top:1090px;font-size:62px;display:flex;align-items:center;justify-content:center;gap:20px"><span style="width:90px;height:90px;display:inline-block">${ICON.wa}</span>+51 967 809 735</div>
+<div class="el h" id="s10g" style="top:1215px;font-size:44px;font-weight:700">duediligencecheck.com</div>
+<div class="el h" id="s10h" style="top:1310px;font-size:26px;font-weight:600;letter-spacing:.25em;opacity:.85">UNA PLATAFORMA DE<br><span style="font-size:34px;letter-spacing:.12em;font-weight:800">A&amp;C ASISTENCIA Y CONSULTORÍA</span></div>`
+};
+/* ---------- PEPE ---------- */
+const PSVG=`<defs>
+<radialGradient id="gH" cx="38%" cy="30%" r="75%"><stop offset="0" stop-color="#3d6be0"/><stop offset=".6" stop-color="#1c3f9e"/><stop offset="1" stop-color="#11286e"/></radialGradient>
+<radialGradient id="gB" cx="38%" cy="28%" r="80%"><stop offset="0" stop-color="#3563d6"/><stop offset=".65" stop-color="#183a94"/><stop offset="1" stop-color="#0f2465"/></radialGradient>
+<filter id="gl" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="sh" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+</defs>
+<g id="pp">
+ <ellipse id="pshadow" cx="0" cy="372" rx="120" ry="20" fill="rgba(0,0,0,.35)" filter="url(#sh)"/>
+ <g id="pbody">
+  <circle cx="0" cy="210" r="120" fill="url(#gB)" stroke="#5ff0b0" stroke-width="11"/>
+  <g transform="translate(0,212)">
+   <path d="M0-66 50-46v40c0 34-22 56-50 70-28-14-50-36-50-70v-40z" fill="rgba(255,255,255,.08)" stroke="#cfe6ff" stroke-width="7" stroke-linejoin="round"/>
+   <path d="M-25 -6l17 18 34-38" fill="none" stroke="#5ff0b0" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+   <circle cx="30" cy="34" r="15" fill="#0f2465" stroke="#fff" stroke-width="6"/><path d="M41 45l13 13" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g id="parmL"><path id="aL" fill="none" stroke="#5ff0b0" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/><circle id="hL" r="27" fill="#e9fff6" stroke="#5ff0b0" stroke-width="7" filter="url(#gl)"/></g>
+  <g id="parmR"><path id="aR" fill="none" stroke="#5ff0b0" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/><circle id="hR" r="27" fill="#e9fff6" stroke="#5ff0b0" stroke-width="7" filter="url(#gl)"/></g>
+  <g id="phead">
+   <g id="pant"><path d="M0-104 Q 4 -135 0 -160" fill="none" stroke="#5ff0b0" stroke-width="9" stroke-linecap="round"/><circle id="pball" cx="0" cy="-170" r="17" fill="#9ff8d2" filter="url(#gl)"/></g>
+   <circle cx="0" cy="0" r="114" fill="url(#gH)" stroke="#5ff0b0" stroke-width="11"/>
+   <ellipse cx="-40" cy="-58" rx="34" ry="16" fill="rgba(255,255,255,.12)" transform="rotate(-20 -40 -58)"/>
+   <g id="pface">
+    <g id="eyeL" transform="translate(-41,-10)"><g class="eb"><ellipse rx="27" ry="31" fill="#fff"/><circle class="pu" r="14" fill="#0b1636"/><circle class="hl" r="5" fill="#fff"/></g></g>
+    <g id="eyeR" transform="translate(41,-10)"><g class="eb"><ellipse rx="27" ry="31" fill="#fff"/><circle class="pu" r="14" fill="#0b1636"/><circle class="hl" r="5" fill="#fff"/></g></g>
+    <path id="brL" fill="none" stroke="#0b1636" stroke-width="7" stroke-linecap="round"/>
+    <path id="brR" fill="none" stroke="#0b1636" stroke-width="7" stroke-linecap="round"/>
+    <ellipse cx="-74" cy="30" rx="17" ry="10" fill="#ff8fa3" opacity=".8"/><ellipse cx="74" cy="30" rx="17" ry="10" fill="#ff8fa3" opacity=".8"/>
+    <path id="msmile" fill="none" stroke="#ff6b8a" stroke-width="8" stroke-linecap="round"/>
+    <path id="mopen" fill="#5a0b25" stroke="#ff6b8a" stroke-width="6" stroke-linejoin="round"/>
+    <ellipse id="mtong" fill="#ff7b9a"/>
+   </g>
+  </g>
+  <g id="pshield" opacity="0"><path d="M0 120 95 156v70c0 64-42 106-95 132-53-26-95-68-95-132v-70z" fill="#0b3a8c" stroke="#5ff0b0" stroke-width="12" stroke-linejoin="round"/><path d="M-42 235l30 32 56-66" fill="none" stroke="#5ff0b0" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></g>
+ </g>
+</g>`;
+const PK={1:[540,2500,1.4],2:[540,1010,1.45],3:[860,1290,.82],4:[912,1395,.6],5:[870,1300,.72],6:[900,1410,.6],7:[905,1395,.6],8:[540,1150,.95],9:[905,1410,.62],10:[540,860,1.0],11:[540,600,.9]};
+function arm(side,a1,a2){const r=Math.PI/180,sx=side*92,sy=150,L1=74,L2=68;const x1=sx+side*Math.cos(a1*r)*L1,y1=sy+Math.sin(a1*r)*L1,x2=x1+side*Math.cos((a1+a2)*r)*L2,y2=y1+Math.sin((a1+a2)*r)*L2;return [`M${sx} ${sy}L${x1.toFixed(1)} ${y1.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}`,x2,y2];}
+function setArm(id,side,a1,a2){const [d,x,y]=arm(side,a1,a2);$('a'+id).setAttribute('d',d);$('h'+id).setAttribute('cx',x);$('h'+id).setAttribute('cy',y);}
+function pepeScene(t){let k=1;for(let i=1;i<=10;i++)if(t>=S[i]-.25)k=i;if(k===10&&t>=W(10,'escríbenos',.85)-.5)k=11;return k;}
+function pepePos(t){
+ const k=pepeScene(t);const st0=k===11?W(10,'escríbenos',.85)-.5:S[k]-.25;
+ const prev=k===11?10:Math.max(1,k-1);const u=eio(prog(t,st0,k===2?1.1:.9));
+ let [x0,y0,s0]=PK[prev],[x1,y1,s1]=PK[k];
+ if(k===2){y0=2300;s0=1.2;}
+ let y=lerp(y0,y1,k===2?eob(prog(t,st0,1.1)):u);
+ return [lerp(x0,x1,u),y,lerp(s0,s1,u),k];
+}
+function drawPepe(t,fr){
+ const [x,y0,s,k]=pepePos(t);
+ const bob=Math.sin(t*2.3)*9, y=y0+bob*s;
+ $('pp').setAttribute('transform',`translate(${x.toFixed(1)},${y.toFixed(1)}) scale(${s.toFixed(3)})`);
+ $('pshadow').setAttribute('transform',`translate(0,${(-bob).toFixed(1)}) scale(${(1-bob/80).toFixed(3)},1)`);
+ const tilt=Math.sin(t*1.3)*3+(k===9?Math.sin(t*14)*1.2:0);
+ $('pbody').setAttribute('transform',`rotate(${tilt.toFixed(2)} 0 210)`);
+ $('pant').setAttribute('transform',`rotate(${(Math.sin(t*3.1)*8).toFixed(1)} 0 -104)`);
+ $('pball').setAttribute('r',(16+3*Math.sin(t*6)).toFixed(1));
+ // expression
+ let ex='happy';
+ if(k===1||(k===9&&t<W(9,'octubre',.15)))ex='surprised';
+ if(k===9&&t>=W(9,'octubre',.15))ex='worried';
+ if(k===2&&t<S[2]+1.2)ex='surprised';
+ // look direction
+ let lx=0,ly=0;if([3,4,5,6,7,9].includes(k)){lx=-.8;ly=-.3}if(k===8){ly=-.7}if(k===11){ly=.6}
+ lx+=Math.sin(t*.7)*.15;
+ const bl=((t%3.9)<.16)?.12:1;
+ for(const id of ['eyeL','eyeR']){const g=$(id);const eb=g.querySelector('.eb');const sc=ex==='surprised'?1.14:1;eb.setAttribute('transform',`scale(${sc},${(sc*bl).toFixed(2)})`);g.querySelector('.pu').setAttribute('cx',lx*8);g.querySelector('.pu').setAttribute('cy',ly*9);g.querySelector('.hl').setAttribute('cx',lx*8-5);g.querySelector('.hl').setAttribute('cy',ly*9-6);}
+ const bo=ex==='surprised'?-14:0;
+ if(ex==='worried'){$('brL').setAttribute('d','M-64 -50 L-22 -64');$('brR').setAttribute('d','M64 -50 L22 -64');$('brL').setAttribute('transform','');$('brR').setAttribute('transform','');$('brL').style.opacity=1;$('brR').style.opacity=1;}
+ else if(ex==='surprised'){$('brL').setAttribute('d','M-64 -62 Q-42 -78 -20 -62');$('brR').setAttribute('d','M64 -62 Q42 -78 20 -62');$('brL').setAttribute('transform','');$('brR').setAttribute('transform','');$('brL').style.opacity=1;$('brR').style.opacity=1;}
+ else{$('brL').style.opacity=0;$('brR').style.opacity=0;}
+ // mouth
+ const m=cl((RMS[fr]||0)/9*1.15);
+ if(m>.08||ex==='surprised'){
+  let h2=10+36*m,w=24+6*m;if(ex==='surprised'&&m<.3){h2=Math.max(h2,22);w=17;}
+  const top=ex==='worried'?6:-2;
+  $('mopen').setAttribute('d',`M${-w} 42 Q0 ${42+top} ${w} 42 Q${w*.9} ${42+h2} 0 ${42+h2+4} Q${-w*.9} ${42+h2} ${-w} 42Z`);
+  $('mtong').setAttribute('cx',0);$('mtong').setAttribute('cy',42+h2*.72);$('mtong').setAttribute('rx',w*.5);$('mtong').setAttribute('ry',3+h2*.18);
+  $('mopen').style.opacity=1;$('mtong').style.opacity=1;$('msmile').style.opacity=0;
+ }else{
+  $('msmile').setAttribute('d',ex==='worried'?'M-24 52 Q0 38 24 52':'M-26 38 Q0 60 26 38');
+  $('mopen').style.opacity=0;$('mtong').style.opacity=0;$('msmile').style.opacity=1;
+ }
+ // arms
+ let L=[62+4*Math.sin(t*2),-28],R=[62+4*Math.sin(t*2+1),-28],sh=0;
+ if(k===2){R=[-62,-40+28*Math.sin(t*9)];}
+ if(k===3){L=[-8,-6+5*Math.sin(t*3)];}
+ if([4,5,6,7].includes(k)){L=[-20+6*Math.sin(t*2.4),-30];}
+ if(k===8){const u=eo(prog(t,W(8,'confianza',.45),.6));L=[lerp(62,-58,u),lerp(-28,-30+10*Math.sin(t*5),u)];R=[lerp(62,-58,u),lerp(-28,-30+10*Math.sin(t*5+1),u)];}
+ if(k===9){L=[40+6*Math.sin(t*13),-120];R=[40+6*Math.sin(t*13+1),-120];}
+ if(k===10){const u=eo(prog(t,S[10]+.3,.7));sh=u;L=[lerp(62,30,u),lerp(-28,95,u)];R=[lerp(62,30,u),lerp(-28,95,u)];}
+ if(k===11){R=[-62,-40+28*Math.sin(t*9)];sh=1-eo(prog(t,W(10,'escríbenos',.85)-.5,.5));}
+ setArm('L',-1,L[0],L[1]);setArm('R',1,R[0],R[1]);
+ const ps=$('pshield');ps.setAttribute('opacity',sh.toFixed(2));ps.setAttribute('transform',`translate(0,${(1-sh)*60}) scale(${(.7+.3*sh).toFixed(3)})`);
+}
+/* ---------- CAPTIONS ---------- */
+function buildWords(ws){
+ let out=[];
+ for(const [sc,s,e,w0] of ws){let w=w0;const p=out[out.length-1];
+  if(p&&p.sc===sc&&/^\.\d/.test(w)&&/^\d+$/.test(p.w)){p.w=(p.w==='30'?'30424'+w.replace(/^\.\d+/,''):p.w+w);p.e=e;continue;}
+  out.push({sc,s,e,w});}
+ const seqs=[[['américa','express'],['American','Express']],[['banco','de','américa'],['Bank','of','America']],[['diligent','check'],['DiligenceCheck']],[['eximir','la'],['eximirla']],[['a','y','c'],['A&C']]];
+ for(const [sq,rp] of seqs){for(let i=0;i+sq.length<=out.length;i++){if(sq.every((x,j)=>norm(out[i+j].w)===x)){const tail=out[i+sq.length-1].w.match(/[.,?:]+$/);const seg=out.slice(i,i+sq.length);let nw;if(rp.length===sq.length){nw=seg.map((o,j)=>({...o,w:rp[j]}));}else{nw=[{sc:seg[0].sc,s:seg[0].s,e:seg[seg.length-1].e,w:rp[0]}];}if(tail)nw[nw.length-1].w+=tail[0];out.splice(i,sq.length,...nw);}}}
+ const one={'antilabado.':'antilavado.','demostrarlos.':'demostrarlo.','demo':'“DEMO”','superintendencia':'Superintendencia','banca':'Banca','seguros':'Seguros','unidad':'Unidad','inteligencia':'Inteligencia','financiera.':'Financiera.','asistencia':'Asistencia','consultoría':'Consultoría','Hola,':'¡Hola!'};
+ for(let i=0;i<out.length;i++){if(one[out[i].w])out[i].w=one[out[i].w];if(out[i].w==='motivo?'&&i>0&&out[i-1].w==='El')out[i-1].w='¿El';}
+ return out;
+}
+function buildLines(ws){const lines=[];let cur=[];const flush=()=>{if(cur.length){lines.push({w:cur,s:cur[0].s,e:cur[cur.length-1].e,sc:cur[0].sc});cur=[]}};
+ for(const w of ws){if(cur.length&&cur[0].sc!==w.sc)flush();const len=cur.map(x=>x.w).join(' ').length;if(cur.length&&len+w.w.length+1>28)flush();cur.push(w);const L2=cur.map(x=>x.w).join(' ').length;if(/[.?:!]$/.test(w.w)&&L2>=10)flush();else if(/,$/.test(w.w)&&L2>=16)flush();}
+ flush();return lines;}
+let capCur=-1;
+function drawCap(t){
+ let idx=-1;for(let i=0;i<LINES.length;i++){if(t>=LINES[i].s-.12)idx=i;}
+ const cap=$('cap');
+ if(idx<0||t>LINES[idx].e+1.2&&(idx===LINES.length-1||t<LINES[idx+1].s-.12)){cap.style.opacity=0;return;}
+ const L=LINES[idx];
+ if(idx!==capCur){cap.innerHTML=L.w.map(o=>`<span>${o.w}</span>`).join('');capCur=idx;}
+ cap.style.opacity=1;
+ const u=eo(prog(t,L.s-.12,.18));cap.style.transform=`translateY(${(1-u)*14}px)`;
+ const sp=cap.children;
+ for(let i=0;i<L.w.length;i++){const o=L.w[i];const on=t>=o.s-.03&&t<o.e+.04,done=t>=o.s-.03;sp[i].style.color=on?'#5ff0b0':(done?'#fff':'rgba(255,255,255,.42)');sp[i].style.textShadow=on?'0 0 18px rgba(95,240,176,.6)':'none';}
+}
+/* ---------- SCENES ---------- */
+function fmt(n){return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+function sceneAlpha(i,t){const a=S[i]-.3,b=i<10?S[i+1]-.3:TOTAL+5;return eo(prog(t,a,.35))*(1-eo(prog(t,b-.05,.3)));}
+function render(t){
+ const fr=Math.round(t*TM.fps);
+ // bg
+ const stars=$('stars').children;for(let i=0;i<stars.length;i++){const sd=STAR[i];const yy=(sd[1]-t*sd[2]*30)%1960;st(stars[i],.35+.45*Math.abs(Math.sin(t*sd[3]+i)),sd[0],yy<-20?yy+1960:yy,sd[4]);}
+ $('glow').style.transform=`translate(${Math.sin(t*.3)*60}px,${Math.cos(t*.25)*80}px)`;
+ const al=Math.max(sceneAlpha(1,t)*(.6+.4*Math.sin(t*6)),sceneAlpha(9,t)*.55);$('alert').style.opacity=al.toFixed(3);
+ // progress
+ const pr=$('prog').children;for(let i=1;i<=10;i++){const u=cl((t-S[i])/(D[i]+.45));pr[i-1].firstChild.style.width=(u*100).toFixed(1)+'%';}
+ st('logo',1);
+ for(let i=1;i<=10;i++){$('sc'+i).style.opacity=sceneAlpha(i,t).toFixed(3);}
+ // S1
+ if(sceneAlpha(1,t)>0){const q=W(1,'motivo?',.75)-.15;
+  pop('s1chip',t,S[1]+.05);
+  pop('s1num',t,S[1]+.2,{out:q});pop('s1lbl',t,W(1,'dólares',.6)-.3,{out:q});
+  const cu=eo(prog(t,W(1,'multas',.38),W(1,'dólares',.6)-W(1,'multas',.38)+.2));$('s1cnt').textContent=fmt(cu*1550000000);
+  pop('s1a',t,W(1,'gigantes',.15),{dx:-500,dy:0,r:-6,out:q});pop('s1b',t,W(1,'unidos',.3),{dx:500,dy:0,r:5,out:q});
+  pop('s1q',t,q+.1,{out:W(1,'fallas',.85)-.1});pop('s1f',t,W(1,'fallas',.85)-.05,{s0:1.6,dy:0});
+  if(t>W(1,'fallas',.85))$('s1f').style.transform+=` translate(${Math.sin(t*60)*3*(1-prog(t,W(1,'fallas',.85),.6))}px,0)`;
+ }
+ if(sceneAlpha(2,t)>0){pop('s2chip',t,S[2]+.4);pop('s2t',t,W(2,'explico',.6)-.2,{s0:.8});pop('s2b',t,W(2,'hola,',.02)+.15,{out:W(2,'explico',.6)-.3,dy:20});}
+ if(sceneAlpha(3,t)>0){const f=W(3,'significa',.15);pop('s3chip',t,S[3]);pop('s3w1',t,S[3]-.1,{out:f+.1});
+  const u=eo(prog(t,f+.15,.45));st('s3eq',u,0,(1-u)*-40,lerp(1.3,1,u));
+  pop('s3a',t,W(3,'leyes,',.38)-.25,{dx:-300,dy:0});pop('s3b',t,W(3,'normas',.55)-.2,{dx:-300,dy:0});pop('s3c',t,W(3,'políticas',.72)-.2,{dx:-300,dy:0});pop('s3d',t,W(3,'demostrarlos.',.92)-.35,{s0:1.5,dy:0,r:-8});}
+ if(sceneAlpha(4,t)>0){pop('s4chip',t,S[4]);const a=W(4,'1977,',.05),b=W(4,'2002,',.4),c=W(4,'ley',.65);
+  $('s4fill').style.height=(eo(prog(t,a-.2,1))*80+eo(prog(t,b-.4,.8))*320+eo(prog(t,c-.4,.8))*320).toFixed(0)+'px';
+  pop('s4d1',t,a-.2,{dy:0});pop('s4a',t,a-.1,{dx:200,dy:0});pop('s4d2',t,b-.2,{dy:0});pop('s4b',t,b-.1,{dx:200,dy:0});pop('s4d3',t,c-.2,{dy:0});pop('s4c',t,c-.1,{dx:200,dy:0});}
+ if(sceneAlpha(5,t)>0){pop('s5chip',t,S[5]);pop('s5a',t,S[5]+.3);
+  const g=W(5,'gestión',.42);const u=eo(prog(t,g-.1,.5));st('s5a',eo(prog(t,S[5]+.3,.5))*(1-.5*u),0,0,1-.15*u);
+  pop('s5b',t,g-.15,{s0:.5});pop('s5s1',t,W(5,'identificarlos,',.55)-.1);pop('s5ar1',t,W(5,'mitigarlos',.65)-.3,{dy:0,dx:-20});pop('s5s2',t,W(5,'mitigarlos',.65)-.1);pop('s5ar2',t,W(5,'controles',.8)-.3,{dy:0,dx:-20});pop('s5s3',t,W(5,'controles',.8)-.1);pop('s5c',t,W(5,'materialicen.',.95)-.6);
+  const ring=Math.floor(((t-W(5,'controles',.8))*1.4))%3;if(t>W(5,'controles',.8)+.6){['s5s1','s5s2','s5s3'].forEach((id,i)=>{$(id).style.boxShadow=i===ring?'0 0 0 12px rgba(95,240,176,.55),0 20px 50px rgba(0,0,0,.3)':'0 20px 50px rgba(0,0,0,.3)'});}}
+ if(sceneAlpha(6,t)>0){pop('s6chip',t,S[6]);pop('s6t',t,S[6]+.2);const ks=[['penal,',.3],['laboral,',.42],['tributario,',.52],['protección',.6],['ambiental',.75],['prevención',.85]];'abcdef'.split('').forEach((c,i)=>pop('s6'+c,t,W(6,ks[i][0],ks[i][1])-.15,{s0:.3,dy:0,r:i%2?6:-6}));}
+ if(sceneAlpha(7,t)>0){pop('s7chip',t,S[7]);pop('s7globe',t,S[7]+.2,{s0:.4,dy:0});$('s7svg').setAttribute('transform',`rotate(${t*8} 250 250)`);
+  pop('s7gafi',t,W(7,'gafi,',.25)-.1,{s0:1.8,dy:0});pop('s7d',t,W(7,'1989,',.35)-.1);
+  const pe=W(7,'perú',.65);const u=eo(prog(t,pe-.5,.5));st('s7ln',u,0,0,1);$('s7ln').style.transform=`scaleY(${u})`;$('s7ln').style.transformOrigin='50% 0';pop('s7pe',t,pe-.1);pop('s7sbs',t,W(7,'superintendencia',.75)-.15,{dx:-200,dy:0});pop('s7uif',t,W(7,'unidad',.88)-.15,{dx:200,dy:0});}
+ if(sceneAlpha(8,t)>0){pop('s8chip',t,S[8]);pop('s8a',t,W(8,'reputación',.3)-.2,{dx:-400,dy:0});pop('s8b',t,W(8,'confianza',.45)-.2,{dx:400,dy:0});pop('s8c',t,W(8,'modelo',.7)-.2,{dx:-400,dy:0});}
+ if(sceneAlpha(9,t)>0){pop('s9chip',t,S[9]);pop('s9t',t,S[9]+.1,{s0:1.4,dy:0});const a=W(9,'octubre,',.15),b=W(9,'cinco',.5);
+  pop('s9a',t,a-.3,{dx:-500,dy:0});pop('s9b',t,b-.3,{dx:500,dy:0});
+  $('s9n1').textContent=fmt(eo(prog(t,W(9,'multa',.25),W(9,'350',.3)-W(9,'multa',.25)+.6))*350);$('s9n2').textContent=fmt(eo(prog(t,W(9,'pagar',.62),1.0))*1200);
+  pop('s9s1',t,W(9,'antilabado.',.45)-.2,{s0:2.6,dy:0,r:-25,dur:.35});pop('s9s2',t,W(9,'internacionales.',.98)-.5,{s0:2.6,dy:0,r:-25,dur:.35});
+  ['s9s1','s9s2'].forEach(id=>{const el=$(id);el.style.transform+=' rotate(-12deg)';});}
+ if(sceneAlpha(10,t)>0){const e=W(10,'escríbenos',.85)-.5;pop('s10a',t,S[10]+.1,{out:e});pop('s10b',t,W(10,'escudo',.15)-.25,{s0:.5,out:e});pop('s10c',t,W(10,'esperes',.25)-.25,{out:W(10,'a',.4)-.2,s0:1.4,dy:0});pop('s10d',t,W(10,'a',.4)-.15,{out:e});
+  pop('s10e',t,e+.3,{s0:.3,dy:0});if(t>e+.9){const pu=1+.05*Math.sin((t-e)*7);$('s10e').style.transform=`scale(${pu})`;}pop('s10f',t,W(10,'whatsapp',.92)-.2);pop('s10g',t,W(10,'whatsapp',.92)+.2);pop('s10h',t,W(10,'pantalla.',.97)+.2);}
+ drawPepe(t,fr);drawCap(t);
+}
+let STAR=[];
+function init(tm){
+ TM=tm;TOTAL=tm.total;for(const [i,s,d] of tm.sched){S[i]=s;D[i]=d;WD[i]=[];}
+ for(const w of tm.words)WD[w[0]].push(w);
+ RMS=(tm.rms||'').split('').map(Number);
+ LINES=buildLines(buildWords(tm.words));
+ const sc=$('scenes');for(let i=1;i<=10;i++){const d=document.createElement('div');d.className='scene';d.id='sc'+i;d.innerHTML=HTML[i];sc.appendChild(d);}
+ $('pepe').innerHTML=PSVG;
+ const P=$('prog');for(let i=0;i<10;i++){const e=document.createElement('i');e.innerHTML='<b></b>';P.appendChild(e);}
+ let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+ const SS=$('stars');for(let i=0;i<34;i++){STAR.push([rnd()*1080,rnd()*1920,.2+rnd()*.8,.5+rnd()*2,.4+rnd()*.9]);const e=document.createElement('i');e.className='star';SS.appendChild(e);}
+ // globe
+ let g='<circle cx="250" cy="250" r="230" fill="rgba(95,240,176,.08)" stroke="#5ff0b0" stroke-width="4"/>';for(let k=1;k<5;k++)g+=`<ellipse cx="250" cy="250" rx="${230*k/5}" ry="230" fill="none" stroke="rgba(95,240,176,.35)" stroke-width="2"/>`;for(let k=-2;k<=2;k++)g+=`<line x1="${250-Math.sqrt(230*230-(k*80)**2)}" y1="${250+k*80}" x2="${250+Math.sqrt(230*230-(k*80)**2)}" y2="${250+k*80}" stroke="rgba(95,240,176,.35)" stroke-width="2"/>`;
+ for(let k=0;k<9;k++){const a=k*0.7,rr=120+60*(k%3);g+=`<circle cx="${250+rr*Math.cos(a)}" cy="${250+rr*Math.sin(a)}" r="8" fill="#f7c948"/>`;}
+ $('s7svg').innerHTML=g;
+ // pop sfx cues
+ const cues=[];const add=x=>cues.push(+x.toFixed(3));
+ add(S[1]+.2);add(W(1,'gigantes',.15));add(W(1,'unidos',.3));add(W(1,'fallas',.85)-.05);
+ add(W(3,'leyes,',.38)-.25);add(W(3,'normas',.55)-.2);add(W(3,'políticas',.72)-.2);add(W(3,'demostrarlos.',.92)-.35);
+ add(W(4,'1977,',.05)-.1);add(W(4,'2002,',.4)-.1);add(W(4,'ley',.65)-.1);
+ add(W(5,'identificarlos,',.55)-.1);add(W(5,'mitigarlos',.65)-.1);add(W(5,'controles',.8)-.1);
+ [['penal,',.3],['laboral,',.42],['tributario,',.52],['protección',.6],['ambiental',.75],['prevención',.85]].forEach(k=>add(W(6,k[0],k[1])-.15));
+ add(W(7,'gafi,',.25)-.1);add(W(7,'perú',.65)-.1);add(W(7,'superintendencia',.75)-.15);add(W(7,'unidad',.88)-.15);
+ add(W(8,'reputación',.3)-.2);add(W(8,'confianza',.45)-.2);add(W(8,'modelo',.7)-.2);
+ add(W(10,'escríbenos',.85)-.2);
+ const stamps=[W(9,'antilabado.',.45)-.2+.3,W(9,'internacionales.',.98)-.5+.3];
+ window.SFX={pops:cues,stamps,whoosh:[2,3,4,5,6,7,8,9,10].map(i=>+(S[i]-.45).toFixed(3))};
+ return LINES.length;
+}
+</script></body></html>
