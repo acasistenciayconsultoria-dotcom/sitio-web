@@ -52,6 +52,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#052051;font-fam
 .case .amt{font-size:84px;font-weight:900;color:#e5303f;line-height:1.05;margin-top:4px}
 .case .ds{font-size:30px;font-weight:600;color:#3b4a6b;margin-top:6px}
 .stamp{right:40px;top:40px;border:8px solid #e5303f;color:#e5303f;font-weight:900;font-size:50px;padding:6px 22px;border-radius:14px;letter-spacing:.08em;background:rgba(255,255,255,.85)}
+.bill{left:0;top:0;width:150px;height:72px;border-radius:10px;background:linear-gradient(135deg,#2fbf71,#138a4b);border:4px solid #b9f5cf;color:#e9fff1;font-weight:900;font-size:48px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,.35)}
 .btn{left:0;right:0;margin:auto;width:max-content;background:#f7c948;color:#0b2350;font-weight:900;font-size:58px;padding:28px 60px;border-radius:80px;box-shadow:0 0 0 10px rgba(247,201,72,.25),0 20px 40px rgba(0,0,0,.3)}
 </style></head><body><div id="root">
 <div id="bg"></div><div id="glow"></div><div id="grid"></div><div id="alert"></div><div id="stars"></div>
@@ -97,13 +98,29 @@ const US='<svg width="70" height="46" viewBox="0 0 70 46"><rect width="70" heigh
 const PE='<svg width="70" height="46" viewBox="0 0 70 46"><rect width="70" height="46" rx="5" fill="#d91023"/><rect x="23" width="24" height="46" fill="#fff"/></svg>';
 function ico(k,size,bg){return `<div class="ico" style="width:${size}px;height:${size}px;${bg?'background:'+bg:''}">${ICON[k]}</div>`}
 const HTML={
-1:`<div class="el chip red" id="s1chip">ALERTA · OCTUBRE 2026</div>
-<div class="el h" id="s1num" style="top:330px;font-size:104px;letter-spacing:-.03em;white-space:nowrap">US$ <span id="s1cnt">0</span></div>
-<div class="el h" id="s1lbl" style="top:470px;font-size:42px;font-weight:700;opacity:.9">en multas a dos gigantes financieros</div>
-<div class="el card headline" id="s1a" style="top:640px"><span class="tag">MULTA</span><div><div style="font-size:52px;font-weight:900">AMERICAN EXPRESS</div><div style="font-size:42px;font-weight:700;color:#e5303f">US$ 350 millones</div></div></div>
-<div class="el card headline" id="s1b" style="top:900px"><span class="tag">MULTA</span><div><div style="font-size:52px;font-weight:900">BANK OF AMERICA</div><div style="font-size:42px;font-weight:700;color:#e5303f">US$ 1.200 millones</div></div></div>
-<div class="el h" id="s1q" style="top:700px;font-size:96px">¿El motivo?</div>
-<div class="el h" id="s1f" style="top:860px;font-size:84px"><div style="width:150px;height:150px;margin:0 auto 26px">${ICON.warn}</div>Fallas en su<br><span class="y" style="font-size:112px">COMPLIANCE</span></div>`,
+1:`<div class="el" id="s1brk" style="left:0;right:0;top:170px;height:150px;background:#e5162e;display:flex;align-items:center;justify-content:center;gap:24px;font-weight:900;font-size:78px;letter-spacing:.06em;box-shadow:0 0 60px rgba(229,22,46,.7)"><span style="background:#fff;color:#e5162e;font-size:40px;padding:6px 16px;border-radius:10px">EN VIVO</span>ÚLTIMA HORA</div>
+<div class="el" id="s1gav" style="left:240px;top:520px;width:600px;height:600px"><svg width="600" height="600" viewBox="0 0 500 500"><g id="s1gh"><rect x="235" y="150" width="34" height="300" rx="14" fill="#8a5a2b" transform="rotate(-45 250 250)"/><g transform="rotate(-45 250 250)"><rect x="150" y="90" width="200" height="110" rx="24" fill="#a8703a"/><rect x="150" y="122" width="200" height="46" fill="#7a4c22"/></g></g><rect x="110" y="420" width="280" height="44" rx="12" fill="#7a4c22"/></svg></div>
+<div class="el" id="s1ring" style="left:340px;top:820px;width:400px;height:120px;border-radius:50%;border:10px solid #f7c948"></div>
+<div class="el" id="s1a" style="left:70px;top:520px;width:450px;height:820px">
+<svg width="450" height="820" viewBox="0 0 450 820"><defs><linearGradient id="gs1a" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2b4f9e"/><stop offset="1" stop-color="#0c1f52"/></linearGradient></defs>
+<rect x="60" y="120" width="330" height="700" rx="6" fill="url(#gs1a)" stroke="#5ff0b0" stroke-opacity=".35" stroke-width="3"/>
+<rect x="150" y="40" width="150" height="90" fill="#16316f"/><rect x="215" y="0" width="20" height="44" fill="#9ff8d2"/>
+<rect x="90" y="170" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="148" y="170" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="170" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="170" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="322" y="170" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="90" y="232" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="148" y="232" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="206" y="232" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="232" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="322" y="232" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="90" y="294" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="148" y="294" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="294" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="264" y="294" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="322" y="294" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="90" y="356" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="148" y="356" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="356" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="356" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="322" y="356" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="90" y="418" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="148" y="418" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="206" y="418" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="418" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="322" y="418" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="90" y="480" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="148" y="480" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="480" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="264" y="480" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="322" y="480" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="90" y="542" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="148" y="542" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="542" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="542" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="322" y="542" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="90" y="604" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="148" y="604" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="206" y="604" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="604" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="322" y="604" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="90" y="666" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="148" y="666" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="666" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="264" y="666" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="322" y="666" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="90" y="728" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="148" y="728" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="728" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="728" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="322" y="728" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/>
+<rect x="40" y="770" width="370" height="50" fill="#0a1a44"/></svg>
+<div style="position:absolute;left:0;right:0;top:640px;margin:auto;width:400px;background:#fff;color:#0b2350;text-align:center;font-weight:900;font-size:40px;padding:12px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.4)">AMERICAN<br>EXPRESS</div>
+<div class="el" id="s1ast" style="left:-10px;right:-10px;top:250px;text-align:center;border:10px solid #ff3348;color:#ff3348;background:rgba(255,255,255,.93);font-weight:900;font-size:46px;line-height:1.05;padding:16px 10px;border-radius:18px">MULTA<br><span style="font-size:64px">US$ 350 MILLONES</span></div></div><div class="el" id="s1b" style="left:560px;top:520px;width:450px;height:820px">
+<svg width="450" height="820" viewBox="0 0 450 820"><defs><linearGradient id="gs1b" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2b4f9e"/><stop offset="1" stop-color="#0c1f52"/></linearGradient></defs>
+<rect x="60" y="120" width="330" height="700" rx="6" fill="url(#gs1b)" stroke="#5ff0b0" stroke-opacity=".35" stroke-width="3"/>
+<rect x="150" y="40" width="150" height="90" fill="#16316f"/><rect x="215" y="0" width="20" height="44" fill="#9ff8d2"/>
+<rect x="90" y="170" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="148" y="170" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="170" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="170" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="322" y="170" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="90" y="232" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="148" y="232" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="206" y="232" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="232" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="322" y="232" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="90" y="294" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="148" y="294" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="294" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="264" y="294" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="322" y="294" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="90" y="356" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="148" y="356" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="356" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="356" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="322" y="356" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="90" y="418" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="148" y="418" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="206" y="418" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="418" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="322" y="418" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="90" y="480" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="148" y="480" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="480" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="264" y="480" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="322" y="480" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="90" y="542" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="148" y="542" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="542" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="542" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="322" y="542" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="90" y="604" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="148" y="604" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="206" y="604" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="604" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="322" y="604" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="90" y="666" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="148" y="666" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="666" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="264" y="666" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="322" y="666" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="90" y="728" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="148" y="728" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="206" y="728" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/><rect x="264" y="728" width="36" height="38" rx="3" fill="#ffd36b" opacity=".9"/><rect x="322" y="728" width="36" height="38" rx="3" fill="#3d66c4" opacity=".9"/>
+<rect x="40" y="770" width="370" height="50" fill="#0a1a44"/></svg>
+<div style="position:absolute;left:0;right:0;top:640px;margin:auto;width:400px;background:#fff;color:#0b2350;text-align:center;font-weight:900;font-size:40px;padding:12px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.4)">BANK OF<br>AMERICA</div>
+<div class="el" id="s1bst" style="left:-10px;right:-10px;top:250px;text-align:center;border:10px solid #ff3348;color:#ff3348;background:rgba(255,255,255,.93);font-weight:900;font-size:46px;line-height:1.05;padding:16px 10px;border-radius:18px">MULTA<br><span style="font-size:64px">US$ 1.200 MILLONES</span></div></div>
+<div class="el h" id="s1num" style="top:360px;font-size:100px;letter-spacing:-.03em;white-space:nowrap;text-shadow:0 8px 30px rgba(0,0,0,.5)">US$ <span id="s1cnt">0</span></div>
+<div class="el h" id="s1lbl" style="top:480px;font-size:44px;font-weight:800;color:#f7c948">EN MULTAS EN UN SOLO MES</div>
+<div id="s1bills"></div>
+<div class="el h" id="s1q" style="top:720px;font-size:110px">¿El motivo?</div>
+<div class="el h" id="s1f" style="top:640px;font-size:84px"><div style="width:170px;height:170px;margin:0 auto 26px">${ICON.warn}</div>Fallas en su<br><span class="y" style="font-size:116px">COMPLIANCE</span></div>`,
 2:`<div class="el chip" id="s2chip">COMPLIANCE EN 2 MINUTOS</div>
 <div class="el h" id="s2t" style="top:300px;font-size:96px">¿Qué es el<br><span class="g">compliance?</span></div>
 <div class="el card" id="s2b" style="left:60px;top:640px;width:340px;padding:24px 28px;font-size:36px;font-weight:800;border-radius:30px 30px 6px 30px">¡Hola! Soy <span style="color:#19b67a">Pepe</span>, tu oficial de cumplimiento</div>`,
@@ -263,10 +280,10 @@ function buildWords(ws){
  for(const [sc,s,e,w0] of ws){let w=w0;const p=out[out.length-1];
   if(p&&p.sc===sc&&/^\.\d/.test(w)&&/^\d+$/.test(p.w)){p.w=(p.w==='30'?'30424'+w.replace(/^\.\d+/,''):p.w+w);p.e=e;continue;}
   out.push({sc,s,e,w});}
- const seqs=[[['américa','express'],['American','Express']],[['banco','de','américa'],['Bank','of','America']],[['diligent','check'],['DiligenceCheck']],[['eximir','la'],['eximirla']],[['a','y','c'],['A&C']]];
+ const seqs=[[['américa','express'],['American','Express']],[['banco','de','américa'],['Bank','of','America']],[['diligent','check'],['DiligenceCheck']],[['diligence','check'],['DiligenceCheck']],[['eximir','la'],['eximirla']],[['a','y','c'],['A&C']]];
  for(const [sq,rp] of seqs){for(let i=0;i+sq.length<=out.length;i++){if(sq.every((x,j)=>norm(out[i+j].w)===x)){const tail=out[i+sq.length-1].w.match(/[.,?:]+$/);const seg=out.slice(i,i+sq.length);let nw;if(rp.length===sq.length){nw=seg.map((o,j)=>({...o,w:rp[j]}));}else{nw=[{sc:seg[0].sc,s:seg[0].s,e:seg[seg.length-1].e,w:rp[0]}];}if(tail)nw[nw.length-1].w+=tail[0];out.splice(i,sq.length,...nw);}}}
- const one={'antilabado.':'antilavado.','demostrarlos.':'demostrarlo.','demo':'“DEMO”','superintendencia':'Superintendencia','banca':'Banca','seguros':'Seguros','unidad':'Unidad','inteligencia':'Inteligencia','financiera.':'Financiera.','asistencia':'Asistencia','consultoría':'Consultoría','Hola,':'¡Hola!'};
- for(let i=0;i<out.length;i++){if(one[out[i].w])out[i].w=one[out[i].w];if(out[i].w==='motivo?'&&i>0&&out[i-1].w==='El')out[i-1].w='¿El';}
+ const one={'Complayant':'Compliance','Complayance':'compliance','respecte':'respete','AISI':'A&C','1500':'1.500','y':'y','antilabado.':'antilavado.','demostrarlos.':'demostrarlo.','Hola.':'¡Hola!','demo':'“DEMO”','superintendencia':'Superintendencia','banca':'Banca','seguros':'Seguros','unidad':'Unidad','inteligencia':'Inteligencia','financiera.':'Financiera.','asistencia':'Asistencia','consultoría':'Consultoría','Hola,':'¡Hola!'};
+ for(let i=0;i<out.length;i++){if(one[out[i].w])out[i].w=one[out[i].w];if(out[i].w==='motivo?'&&i>0&&out[i-1].w==='El')out[i-1].w='¿El';if(out[i].w==='y'&&(i===0||out[i-1].sc!==out[i].sc))out[i].w='Y';}
  return out;
 }
 function buildLines(ws){const lines=[];let cur=[];const flush=()=>{if(cur.length){lines.push({w:cur,s:cur[0].s,e:cur[cur.length-1].e,sc:cur[0].sc});cur=[]}};
@@ -298,18 +315,29 @@ function render(t){
  st('logo',1);
  for(let i=1;i<=10;i++){$('sc'+i).style.opacity=sceneAlpha(i,t).toFixed(3);}
  // S1
- if(sceneAlpha(1,t)>0){const q=W(1,'motivo?',.75)-.15;
-  pop('s1chip',t,S[1]+.05);
-  pop('s1num',t,S[1]+.2,{out:q});pop('s1lbl',t,W(1,'dólares',.6)-.3,{out:q});
-  const cu=eo(prog(t,W(1,'multas',.38),W(1,'dólares',.6)-W(1,'multas',.38)+.2));$('s1cnt').textContent=fmt(cu*1550000000);
-  pop('s1a',t,W(1,'gigantes',.15),{dx:-500,dy:0,r:-6,out:q});pop('s1b',t,W(1,'unidos',.3),{dx:500,dy:0,r:5,out:q});
-  pop('s1q',t,q+.1,{out:W(1,'fallas',.85)-.1});pop('s1f',t,W(1,'fallas',.85)-.05,{s0:1.6,dy:0});
-  if(t>W(1,'fallas',.85))$('s1f').style.transform+=` translate(${Math.sin(t*60)*3*(1-prog(t,W(1,'fallas',.85),.6))}px,0)`;
- }
+ if(sceneAlpha(1,t)>0){const s0=S[1];const q=W(1,'motivo?',.75)-.15,f1=W(1,'fallas',.85)-.05;
+  // breaking + gavel slam
+  pop('s1brk',t,s0-.25,{s0:1.3,dy:0,dur:.3,out:W(1,'gigantes',.12)});
+  const gs=s0+.05;const gu=prog(t,gs,.32);$('s1gh').setAttribute('transform',`rotate(${lerp(-55,0,eo(gu))} 250 470)`);
+  st('s1gav',(t<gs?eo(prog(t,s0-.3,.3)):1)*(1-eo(prog(t,W(1,'gigantes',.12)-.2,.3))),0,0,1);
+  const ru=prog(t,gs+.3,.6);st('s1ring',ru>0&&ru<1?1-ru:0,0,0,.3+1.4*ru);
+  const shake=t>gs+.28&&t<gs+.7?Math.sin(t*90)*14*(1-prog(t,gs+.28,.42)):0;$('scenes').style.transform=`translate(${shake}px,${shake*.6}px)`;
+  // buildings
+  const g=W(1,'gigantes',.12),u2=W(1,'unidos',.3);
+  pop('s1a',t,g-.2,{dx:-600,dy:0,dur:.6,out:q});pop('s1b',t,u2-.3,{dx:600,dy:0,dur:.6,out:q});
+  const m=W(1,'multas',.38);pop('s1ast',t,m-.1,{s0:3,dy:0,r:-30,dur:.3});pop('s1bst',t,m+.45,{s0:3,dy:0,r:30,dur:.3});
+  ['s1ast','s1bst'].forEach((id,k)=>{$(id).style.transform+=` rotate(${k?8:-8}deg)`;});
+  // counter + bills
+  pop('s1num',t,W(1,'millones',.6)-.6,{out:q,s0:.4,dy:0});pop('s1lbl',t,W(1,'dólares',.65)-.2,{out:q});
+  const cu=eo(prog(t,W(1,'millones',.6)-.6,1.2));$('s1cnt').textContent=fmt(cu*1550000000);
+  const bills=$('s1bills').children;const b0=W(1,'millones',.6)-.6;for(let k=0;k<bills.length;k++){const bd=BILL[k];const tt=t-b0-bd[2];const vis=tt>0&&t<q+.3;const yy=-150+tt*bd[3];st(bills[k],vis?(1-prog(t,q-.2,.4)):0,bd[0],yy,1,bd[1]+tt*bd[4]);}
+  pop('s1q',t,q+.1,{out:f1-.1,s0:1.5,dy:0});pop('s1f',t,f1,{s0:1.6,dy:0});
+  if(t>f1)$('s1f').style.transform+=` translate(${Math.sin(t*60)*4*(1-prog(t,f1,.6))}px,0)`;
+ } else $('scenes').style.transform='';
  if(sceneAlpha(2,t)>0){pop('s2chip',t,S[2]+.4);pop('s2t',t,W(2,'explico',.6)-.2,{s0:.8});pop('s2b',t,W(2,'hola,',.02)+.15,{out:W(2,'explico',.6)-.3,dy:20});}
  if(sceneAlpha(3,t)>0){const f=W(3,'significa',.15);pop('s3chip',t,S[3]);pop('s3w1',t,S[3]-.1,{out:f+.1});
   const u=eo(prog(t,f+.15,.45));st('s3eq',u,0,(1-u)*-40,lerp(1.3,1,u));
-  pop('s3a',t,W(3,'leyes,',.38)-.25,{dx:-300,dy:0});pop('s3b',t,W(3,'normas',.55)-.2,{dx:-300,dy:0});pop('s3c',t,W(3,'políticas',.72)-.2,{dx:-300,dy:0});pop('s3d',t,W(3,'demostrarlos.',.92)-.35,{s0:1.5,dy:0,r:-8});}
+  pop('s3a',t,W(3,'leyes,',.38)-.25,{dx:-300,dy:0});pop('s3b',t,W(3,'normas',.55)-.2,{dx:-300,dy:0});pop('s3c',t,W(3,'políticas',.72)-.2,{dx:-300,dy:0});pop('s3d',t,W(3,'demostrarlo.',.92)-.35,{s0:1.5,dy:0,r:-8});}
  if(sceneAlpha(4,t)>0){pop('s4chip',t,S[4]);const a=W(4,'1977,',.05),b=W(4,'2002,',.4),c=W(4,'ley',.65);
   $('s4fill').style.height=(eo(prog(t,a-.2,1))*80+eo(prog(t,b-.4,.8))*320+eo(prog(t,c-.4,.8))*320).toFixed(0)+'px';
   pop('s4d1',t,a-.2,{dy:0});pop('s4a',t,a-.1,{dx:200,dy:0});pop('s4d2',t,b-.2,{dy:0});pop('s4b',t,b-.1,{dx:200,dy:0});pop('s4d3',t,c-.2,{dy:0});pop('s4c',t,c-.1,{dx:200,dy:0});}
@@ -327,11 +355,11 @@ function render(t){
   $('s9n1').textContent=fmt(eo(prog(t,W(9,'multa',.25),W(9,'350',.3)-W(9,'multa',.25)+.6))*350);$('s9n2').textContent=fmt(eo(prog(t,W(9,'pagar',.62),1.0))*1200);
   pop('s9s1',t,W(9,'antilabado.',.45)-.2,{s0:2.6,dy:0,r:-25,dur:.35});pop('s9s2',t,W(9,'internacionales.',.98)-.5,{s0:2.6,dy:0,r:-25,dur:.35});
   ['s9s1','s9s2'].forEach(id=>{const el=$(id);el.style.transform+=' rotate(-12deg)';});}
- if(sceneAlpha(10,t)>0){const e=W(10,'escríbenos',.85)-.5;pop('s10a',t,S[10]+.1,{out:e});pop('s10b',t,W(10,'escudo',.15)-.25,{s0:.5,out:e});pop('s10c',t,W(10,'esperes',.25)-.25,{out:W(10,'a',.4)-.2,s0:1.4,dy:0});pop('s10d',t,W(10,'a',.4)-.15,{out:e});
+ if(sceneAlpha(10,t)>0){const e=W(10,'escríbenos',.85)-.5;pop('s10a',t,S[10]+.1,{out:e});pop('s10b',t,W(10,'escudo',.15)-.25,{s0:.5,out:e});pop('s10c',t,W(10,'esperes',.25)-.25,{out:W(10,'asistencia',.42)-.2,s0:1.4,dy:0});pop('s10d',t,W(10,'asistencia',.42)-.15,{out:e});
   pop('s10e',t,e+.3,{s0:.3,dy:0});if(t>e+.9){const pu=1+.05*Math.sin((t-e)*7);$('s10e').style.transform=`scale(${pu})`;}pop('s10f',t,W(10,'whatsapp',.92)-.2);pop('s10g',t,W(10,'whatsapp',.92)+.2);pop('s10h',t,W(10,'pantalla.',.97)+.2);}
  drawPepe(t,fr);drawCap(t);
 }
-let STAR=[];
+let STAR=[],BILL=[];
 function init(tm){
  TM=tm;TOTAL=tm.total;for(const [i,s,d] of tm.sched){S[i]=s;D[i]=d;WD[i]=[];}
  for(const w of tm.words)WD[w[0]].push(w);
@@ -342,21 +370,22 @@ function init(tm){
  const P=$('prog');for(let i=0;i<10;i++){const e=document.createElement('i');e.innerHTML='<b></b>';P.appendChild(e);}
  let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
  const SS=$('stars');for(let i=0;i<34;i++){STAR.push([rnd()*1080,rnd()*1920,.2+rnd()*.8,.5+rnd()*2,.4+rnd()*.9]);const e=document.createElement('i');e.className='star';SS.appendChild(e);}
+ const BB=$('s1bills');for(let k=0;k<22;k++){BILL.push([rnd()*980,rnd()*360-180,rnd()*1.2,700+rnd()*500,rnd()*200-100]);const e=document.createElement('div');e.className='el bill';e.innerHTML='$';BB.appendChild(e);}
  // globe
  let g='<circle cx="250" cy="250" r="230" fill="rgba(95,240,176,.08)" stroke="#5ff0b0" stroke-width="4"/>';for(let k=1;k<5;k++)g+=`<ellipse cx="250" cy="250" rx="${230*k/5}" ry="230" fill="none" stroke="rgba(95,240,176,.35)" stroke-width="2"/>`;for(let k=-2;k<=2;k++)g+=`<line x1="${250-Math.sqrt(230*230-(k*80)**2)}" y1="${250+k*80}" x2="${250+Math.sqrt(230*230-(k*80)**2)}" y2="${250+k*80}" stroke="rgba(95,240,176,.35)" stroke-width="2"/>`;
  for(let k=0;k<9;k++){const a=k*0.7,rr=120+60*(k%3);g+=`<circle cx="${250+rr*Math.cos(a)}" cy="${250+rr*Math.sin(a)}" r="8" fill="#f7c948"/>`;}
  $('s7svg').innerHTML=g;
  // pop sfx cues
  const cues=[];const add=x=>cues.push(+x.toFixed(3));
- add(S[1]+.2);add(W(1,'gigantes',.15));add(W(1,'unidos',.3));add(W(1,'fallas',.85)-.05);
- add(W(3,'leyes,',.38)-.25);add(W(3,'normas',.55)-.2);add(W(3,'políticas',.72)-.2);add(W(3,'demostrarlos.',.92)-.35);
+ add(W(1,'multas',.38)-.1);add(W(1,'multas',.38)+.45);add(W(1,'fallas',.85)-.05);
+ add(W(3,'leyes,',.38)-.25);add(W(3,'normas',.55)-.2);add(W(3,'políticas',.72)-.2);add(W(3,'demostrarlo.',.92)-.35);
  add(W(4,'1977,',.05)-.1);add(W(4,'2002,',.4)-.1);add(W(4,'ley',.65)-.1);
  add(W(5,'identificarlos,',.55)-.1);add(W(5,'mitigarlos',.65)-.1);add(W(5,'controles',.8)-.1);
  [['penal,',.3],['laboral,',.42],['tributario,',.52],['protección',.6],['ambiental',.75],['prevención',.85]].forEach(k=>add(W(6,k[0],k[1])-.15));
  add(W(7,'gafi,',.25)-.1);add(W(7,'perú',.65)-.1);add(W(7,'superintendencia',.75)-.15);add(W(7,'unidad',.88)-.15);
  add(W(8,'reputación',.3)-.2);add(W(8,'confianza',.45)-.2);add(W(8,'modelo',.7)-.2);
  add(W(10,'escríbenos',.85)-.2);
- const stamps=[W(9,'antilabado.',.45)-.2+.3,W(9,'internacionales.',.98)-.5+.3];
+ const stamps=[S[1]+.33,W(9,'antilabado.',.45)-.2+.3,W(9,'internacionales.',.98)-.5+.3];
  window.SFX={pops:cues,stamps,whoosh:[2,3,4,5,6,7,8,9,10].map(i=>+(S[i]-.45).toFixed(3))};
  return LINES.length;
 }
